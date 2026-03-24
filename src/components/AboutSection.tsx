@@ -126,7 +126,7 @@ export default function AboutSection() {
               <motion.span
                 key={skill}
                 className="text-[0.65rem] tracking-widest uppercase px-3 py-1.5 rounded-full
-                  border cursor-default transition-all duration-200"
+                  border cursor-default transition-all duration-75"
                 style={{
                   borderColor: 'var(--border)',
                   color: 'var(--muted)',
@@ -136,9 +136,11 @@ export default function AboutSection() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 + i * 0.05, duration: 0.4 }}
                 whileHover={{
+                  scale: 1.1,
                   borderColor: 'var(--accent)',
                   color: 'var(--accent)',
                   backgroundColor: 'rgba(200,240,96,0.05)',
+                  transition: { duration: 0.08 },
                 }}
               >
                 {skill}
@@ -161,7 +163,9 @@ export default function AboutSection() {
                   style={{
                     borderRight: i < stats.length - 1 ? '1px solid var(--border)' : 'none',
                   }}
-                  whileHover={{ backgroundColor: 'var(--card-bg)' }}
+                  whileHover={{ backgroundColor: 'var(--card-bg)',
+                    transition: { duration: 0.08 }
+                  }}
                 >
                   <div
                     className="font-serif text-[1.8rem] leading-none mb-1"
