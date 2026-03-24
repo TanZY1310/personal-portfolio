@@ -7,7 +7,7 @@ import Footer from '@/components/Footer'
 
 import { motion, useScroll } from 'motion/react'
 
-
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export default function Home() {
   const { scrollYProgress } = useScroll()
