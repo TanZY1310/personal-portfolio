@@ -5,28 +5,22 @@ import { motion } from 'motion/react'
 export default function Footer() {
   return (
     <motion.footer
-      className="border-t px-12 py-6 flex flex-col md:flex-row justify-between
-        items-center gap-2 text-center"
-      style={{ borderColor: 'var(--border)' }}
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
+      className="border-t py-8"
+      style={{ borderColor: 'var(--border)' }}
     >
-      <span
-        className="text-[0.65rem] tracking-widest"
-        style={{ color: 'var(--muted)' }}
-      >
-        © 2026 Tan Ze Yan — All rights reserved
-      </span>
-      <span
-        className="text-[0.65rem] tracking-widest"
-        style={{ color: 'var(--muted)' }}
-      >
-        Built with{' '}
-        <span style={{ color: 'var(--accent)' }}>Next.js</span>
-        {' '}+ Tailwind + Framer Motion
-      </span>
+      <div className="page-container flex flex-wrap items-center justify-between gap-4 font-mono text-[0.72rem] text-muted">
+        <span>© 2026 Tan Ze Yan — All rights reserved</span>
+        <span>
+          Built with <span className="text-accent-2">Next.js</span> + Tailwind + Framer Motion
+        </span>
+        <motion.a href="#hero" className="inline-flex items-center gap-[0.4rem] text-muted no-underline transition-colors duration-200 hover:text-accent" whileHover={{ y: -2 }}>
+          Back to top ↑
+        </motion.a>
+      </div>
     </motion.footer>
   )
 }

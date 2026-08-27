@@ -1,42 +1,30 @@
 'use client'
 
+import { MotionConfig } from 'motion/react'
+
+import ScrollProgress from '@/components/ScrollProgress'
 import Navbar from '@/components/Navbar'
-import AboutSection from '@/components/AboutSection'
+import Hero from '@/components/Hero'
+import Projects from '@/components/Projects'
+import Experience from '@/components/Experience'
 import ContactSection from '@/components/ContactSection'
 import Footer from '@/components/Footer'
 
-import { motion, useScroll } from 'motion/react'
-
-import { SpeedInsights } from "@vercel/speed-insights/next"
-
 export default function Home() {
-  const { scrollYProgress } = useScroll()
-
   return (
-    <>
-      <motion.div
-        style={{
-          scaleX: scrollYProgress,
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          height: '2px',
-          background: 'var(--accent)',
-          transformOrigin: '0%',
-          zIndex: 200,
-        }}
-      />
+    <MotionConfig reducedMotion="user">
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
+      <ScrollProgress />
       <Navbar />
-      <main className="pt-20">
-        <AboutSection />
-
-        {/* Gradient divider */}
-        <div className="section-divider" />
-
+      <main id="main">
+        <Hero />
+        <Projects />
+        <Experience />
         <ContactSection />
       </main>
       <Footer />
-    </>
+    </MotionConfig>
   )
 }

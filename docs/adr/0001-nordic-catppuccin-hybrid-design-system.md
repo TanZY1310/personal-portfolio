@@ -1,0 +1,5 @@
+# 0001 Nordic–Catppuccin hybrid design system
+
+The portfolio adopts a hybrid design system: Nord Polar Night backgrounds with Snow Storm text and Catppuccin Mocha pastel accents in the default dark theme, with a light mode built from the Catppuccin Latte palette. Fonts are Inter + JetBrains Mono loaded via `next/font`, and styling is Tailwind-first with design tokens exposed through `@theme`/`@theme inline`.
+
+Nord ships no light variant, so the light theme cannot reuse Nord tokens. We chose Catppuccin Latte because it is the official light counterpart to the Mocha accents already in use — keeping accent hues consistent across both themes — with Nord Frost (`#88C0D0`) retained as a shared bridge accent. Inter/JetBrains Mono replace the previous DM Serif Display/DM Mono/Syne stack, and Tailwind utilities (plus `@utility` component blocks and a small unavoidable-CSS surface for pseudo-elements, keyframes, and the noise overlay) replace the previous Tailwind-plus-inline-styles approach.

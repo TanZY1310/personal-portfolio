@@ -1,8 +1,34 @@
 'use client'
 
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useSyncExternalStore } from 'react'
 
 type Theme = 'dark' | 'light'
+
+const STORAGE_KEY = 'portfolio-theme'
+
+const listeners = new Set<() => void>()
+
+function subscribe(callback: () => void) {
+  listeners.add(callback)
+  return () => {
+    listeners.delete(callback)
+  }
+}
+
+function getSnapshot(): Theme {
+  if (typeof window === 'undefined') return 'dark'
+  const stored = window.localStorage.getItem(STORAGE_KEY)
+  return stored === 'light' ? 'light' : 'dark'
+}
+
+function getServerSnapshot(): Theme {
+  return 'dark'
+}
+
+function setStoredTheme(next: Theme) {
+  if (typeof window !== 'undefined') window.localStorage.setItem(STORAGE_KEY, next)
+  listeners.forEach((l) => l())
+}
 
 interface ThemeContextValue {
   theme: Theme
@@ -15,24 +41,14 @@ const ThemeContext = createContext<ThemeContextValue>({
 })
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>('dark')
-
-  useEffect(() => {
-    const stored = localStorage.getItem('portfolio-theme') as Theme | null
-    if (stored) setTheme(stored)
-  }, [])
+  const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
 
   useEffect(() => {
     const root = document.documentElement
-    if (theme === 'light') {
-      root.classList.add('light')
-    } else {
-      root.classList.remove('light')
-    }
-    localStorage.setItem('portfolio-theme', theme)
+    root.classList.toggle('light', theme === 'light')
   }, [theme])
 
-  const toggleTheme = () => setTheme(t => (t === 'dark' ? 'light' : 'dark'))
+  const toggleTheme = () => setStoredTheme(theme === 'dark' ? 'light' : 'dark')
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>

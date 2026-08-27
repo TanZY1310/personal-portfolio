@@ -1,30 +1,30 @@
 import type { Metadata } from 'next'
-import { DM_Serif_Display, DM_Mono, Syne } from 'next/font/google'
+import { Inter, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/lib/ThemeContext'
 
-const dmSerif = DM_Serif_Display({
+const inter = Inter({
   subsets: ['latin'],
-  weight: ['400'],
-  style: ['normal', 'italic'],
-  variable: '--font-serif',
+  display: 'swap',
+  variable: '--font-inter',
 })
 
-const dmMono = DM_Mono({
+const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
-  weight: ['300', '400', '500'],
-  variable: '--font-mono',
-})
-
-const syne = Syne({
-  subsets: ['latin'],
-  weight: ['400', '600', '800'],
-  variable: '--font-sans',
+  display: 'swap',
+  variable: '--font-jetbrains-mono',
 })
 
 export const metadata: Metadata = {
-  title: 'Tan Ze Yan — Portfolio',
-  description: 'Full-Stack Developer based in Kuala Lumpur',
+  title: 'Tan Ze Yan — Full-Stack Developer',
+  description:
+    'Portfolio of Tan Ze Yan, a full-stack developer and upcoming AI engineer based in Kuala Lumpur.',
+  openGraph: {
+    title: 'Tan Ze Yan — Full-Stack Developer',
+    description:
+      'Full-stack developer building thoughtful digital experiences with Java, Python and TypeScript.',
+    type: 'website',
+  },
 }
 
 export default function RootLayout({
@@ -33,8 +33,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={`${dmSerif.variable} ${dmMono.variable} ${syne.variable}`}>
+    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
+      <body className="font-sans antialiased">
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
